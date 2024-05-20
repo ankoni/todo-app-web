@@ -1,0 +1,18 @@
+:host {
+  cursor: pointer;
+}
+
+.board-card {
+  &_body {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    min-height: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+  }
+  &_name {
+    font-size: 24px;
+    font-weight: 700;
+  }
+}

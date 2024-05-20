@@ -1,0 +1,16 @@
+<nb-card accent="primary" (click)="navigateToBoard()">
+    <nb-card-body class="board-card_body">
+        <div stopEventPropagation>
+            <button nbButton ghost
+                    id="menuBtn"
+                    nbContextMenuTag="card-menu"
+                    [nbContextMenu]="cardMenuItems"
+                    (click)="toggleMenu()">
+                <nb-icon icon="more-vertical-outline"></nb-icon>
+            </button>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="board-card_name">{{ board.name }}</div>
+    </nb-card-footer>
+</nb-card>

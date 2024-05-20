@@ -1,0 +1,13 @@
+<nb-layout>
+    <nb-layout-column>
+        <h1 class="jc-space-between">
+            <div>Boards</div>
+            <button nbButton outline status="primary" (click)="addNewBoard()">Add board</button>
+        </h1>
+        <div class="boards">
+            <app-board-card *ngFor="let board of (boardList$ | async)"
+                            [board]="board"/>
+        </div>
+        <div *ngIf="!(boardList$ | async)?.length">Empty</div>
+    </nb-layout-column>
+</nb-layout>

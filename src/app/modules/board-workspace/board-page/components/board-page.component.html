@@ -1,0 +1,23 @@
+<nb-layout>
+    <nb-layout-header fixed>
+        <button nbButton ghost status="basic" nbTooltip="Back" (click)="backToBoardList()">
+            <nb-icon icon="arrow-back-outline"></nb-icon>
+        </button>
+    </nb-layout-header>
+
+    <nb-layout-column class="board-page_content">
+        <h1 class="jc-space-between">
+            <div>{{ (boardInfo$ | async)?.name }}</div>
+            <button nbButton outline status="primary" (click)="addNewTaskList()">Add task list</button>
+        </h1>
+        <div class="task-column-list">
+            <div *ngFor="let list of taskLists$ | async">
+                <app-tasks-column [taskListId]="list.id"></app-tasks-column>
+            </div>
+        </div>
+    </nb-layout-column>
+
+    <nb-layout-footer fixed>
+        <!-- Insert footer here -->
+    </nb-layout-footer>
+</nb-layout>

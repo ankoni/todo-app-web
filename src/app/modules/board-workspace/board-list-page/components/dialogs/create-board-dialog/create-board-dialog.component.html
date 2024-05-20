@@ -1,0 +1,35 @@
+<nb-card class="dialog-content">
+    <nb-card-header>
+        <div class="dialog-content_header jc-space-between">
+            <span>Create board</span>
+
+            <nb-icon class="btn-icon" icon="close-outline" (click)="close()"></nb-icon>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="form">
+            <label>Name
+                <input nbInput
+                       fullWidth
+                       type="text" placeholder="Name"
+                       fieldSize="small"
+                       [formControlName]="'name'"
+                >
+            </label>
+            <label>Description
+                <input nbInput
+                       fullWidth
+                       type="text" placeholder="Description"
+                       fieldSize="small"
+                       [formControlName]="'description'"
+                >
+            </label>
+        </form>
+    </nb-card-body>
+    <nb-card-footer class="dialog-content_action">
+        <button nbButton (click)="close()">Cancel</button>
+        <button nbButton status="primary"
+                [disabled]="form.invalid"
+                (click)="accept()">Create</button>
+    </nb-card-footer>
+</nb-card>

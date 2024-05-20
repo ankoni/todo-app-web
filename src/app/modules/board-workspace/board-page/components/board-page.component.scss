@@ -1,0 +1,12 @@
+.board-page_content {
+  display: flex;
+  flex-direction: column;
+}
+.task-column-list {
+  display: flex;
+  flex: 1 0 auto;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 24px;
+  overflow-x: scroll;
+}

@@ -1,0 +1,12 @@
+.dialog-content {
+  width: 300px;
+
+  &_header {
+    align-items: center;
+    font-size: 18px;
+  }
+  &_action {
+    display: flex;
+    justify-content: space-between;
+  }
+}
