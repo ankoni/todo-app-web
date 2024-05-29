@@ -1,14 +1,30 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Board } from "../../../../../models/board-workspace/board";
 import { Subject, takeUntil } from "rxjs";
-import {NbContextMenuDirective, NbMenuItem, NbMenuService} from "@nebular/theme";
+import {
+    NbButtonModule,
+    NbCardModule,
+    NbContextMenuDirective,
+    NbContextMenuModule, NbIconModule,
+    NbMenuItem,
+    NbMenuService
+} from "@nebular/theme";
 import { Router } from "@angular/router";
 import {BoardService} from "../../services/board.service";
+import { CoreComponentsModule } from "../../../../../common/core-components.module";
 
 @Component({
     selector: 'app-board-card',
     templateUrl: './board-card.component.html',
-    styleUrls: ['./board-card.component.scss']
+    styleUrls: ['./board-card.component.scss'],
+    imports: [
+        NbCardModule,
+        CoreComponentsModule,
+        NbButtonModule,
+        NbContextMenuModule,
+        NbIconModule
+    ],
+    standalone: true
 })
 export class BoardCardComponent implements OnInit, OnDestroy {
     private destroyed$ = new Subject<void>();

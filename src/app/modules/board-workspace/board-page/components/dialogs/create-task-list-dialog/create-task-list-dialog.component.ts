@@ -1,11 +1,19 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {NbDialogRef} from "@nebular/theme";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { NbButtonModule, NbCardModule, NbDialogRef, NbIconModule, NbInputModule } from "@nebular/theme";
 import {CreateTaskListDialogData} from "../../../../../../models/board-workspace/task-list";
 
 @Component({
     selector: 'app-create-tasks-column-dialog',
     templateUrl: './create-task-list-dialog.component.html',
+    standalone: true,
+    imports: [
+        NbCardModule,
+        NbIconModule,
+        ReactiveFormsModule,
+        NbInputModule,
+        NbButtonModule
+    ],
     styleUrls: ['./create-task-list-dialog.component.scss', '../../../../../../common/components/dialogs/dialog.scss']
 })
 export class CreateTaskListDialogComponent {

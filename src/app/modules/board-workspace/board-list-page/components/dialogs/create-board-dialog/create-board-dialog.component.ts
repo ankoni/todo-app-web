@@ -1,11 +1,19 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { NbDialogRef } from "@nebular/theme";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { NbButtonModule, NbCardModule, NbDialogRef, NbIconModule, NbInputModule } from "@nebular/theme";
 import { CreateBoardDialogData } from "../../../../../../models/board-workspace/board";
 
 @Component({
     selector: 'app-create-board-dialog',
     templateUrl: './create-board-dialog.component.html',
+    standalone: true,
+    imports: [
+        NbCardModule,
+        NbIconModule,
+        ReactiveFormsModule,
+        NbInputModule,
+        NbButtonModule
+    ],
     styleUrls: ['./create-board-dialog.component.scss', '../../../../../../common/components/dialogs/dialog.scss']
 })
 export class CreateBoardDialogComponent {
