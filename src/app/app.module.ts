@@ -1,3 +1,5 @@
+import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
+import { TuiRootModule, TuiDialogModule, TuiAlertModule, TUI_SANITIZER } from "@taiga-ui/core";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
@@ -24,10 +26,14 @@ import { GraphQLModule } from './graphql.module';
         StoreModule.forRoot({}, {}),
         EffectsModule.forRoot([]),
         GraphQLModule,
-        NbMenuModule.forRoot()
+        NbMenuModule.forRoot(),
+        TuiRootModule,
+        TuiDialogModule,
+        TuiAlertModule
     ],
     providers: [
-        HttpClient
+        HttpClient,
+        {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}
     ],
     bootstrap: [AppComponent],
 })

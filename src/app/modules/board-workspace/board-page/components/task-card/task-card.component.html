@@ -1,5 +1,5 @@
-<nb-card>
-    <nb-card-body class="task-card" (click)="openTaskEditDialog()">
+<tui-island>
+    <div class="tui-island__paragraph task-card" (click)="openTaskEditDialog()">
         <div class="jc-space-between">
             <ng-container [ngTemplateOutlet]="editMode ? editName : showInfo"/>
             <button *ngIf="taskData.id"
@@ -8,17 +8,20 @@
                     status="danger"
                     (click)="deleteTask()">Delete</button>
         </div>
-    </nb-card-body>
-</nb-card>
+    </div>
+</tui-island>
 
 <ng-template #editName>
-    <form [formGroup]="form">
-        <input nbInput type="text" placeholder="Name"
-               fieldSize="small"
-               [formControlName]="'name'"
-               (focusout)="onSave()"
-               (keydown.enter)="onSave()"
+    <form [formGroup]="form" class="task-card_edit-field">
+        <tui-input
+            [formControlName]="'name'"
+            (focusout)="onSave()"
+            (keydown.enter)="onSave()"
         >
+            <input tuiTextfield
+                   type="text" placeholder="Name"
+            >
+        </tui-input>
     </form>
 
     <button (click)="onSave()">Save</button>

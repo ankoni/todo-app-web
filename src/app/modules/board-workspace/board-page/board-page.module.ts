@@ -21,6 +21,7 @@ import { TaskService } from "./services/tasks/task.service";
 import { TaskApiService } from "./services/tasks/task-api.service";
 import { TaskEffects } from "../../../store/board-page/task/task.effects";
 import { CoreComponentsModule } from "../../../common/core-components.module";
+import { TuiInputModule, TuiIslandModule } from "@taiga-ui/kit";
 
 const routes: Routes = [
     {
@@ -46,7 +47,7 @@ const routes: Routes = [
         EffectsModule.forFeature([TaskListEffects, TaskEffects]),
         NbIconModule,
         NbTooltipModule,
-        CoreComponentsModule
+        CoreComponentsModule, TuiIslandModule, TuiInputModule,
     ],
     providers: [
         TaskService,

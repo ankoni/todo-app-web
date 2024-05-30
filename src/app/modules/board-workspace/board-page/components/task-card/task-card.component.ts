@@ -1,14 +1,17 @@
-import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {TaskService} from "../../services/tasks/task.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Subject} from "rxjs";
+import { ChangeDetectionStrategy, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { TaskService } from "../../services/tasks/task.service";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Subject } from "rxjs";
 import { Task } from '../../../../../models/board-workspace/task';
+import { TuiDialogService } from "@taiga-ui/core";
+import { EditTaskDialogComponent } from "../dialogs/edit-task-dialog/edit-task-dialog.component";
+import { PolymorpheusComponent } from "@tinkoff/ng-polymorpheus";
 
 @Component({
     selector: 'app-task-card',
     templateUrl: './task-card.component.html',
     styleUrls: ['./task-card.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskCardComponent implements OnInit, OnDestroy {
     @Input() listId: string = '';
@@ -23,7 +26,8 @@ export class TaskCardComponent implements OnInit, OnDestroy {
     private destroyed$: Subject<void> = new Subject<void>();
 
     constructor(
-        private taskService: TaskService
+        private taskService: TaskService,
+        @Inject(TuiDialogService) private readonly dialogs: TuiDialogService
     ) {
     }
 
@@ -39,7 +43,12 @@ export class TaskCardComponent implements OnInit, OnDestroy {
     }
 
     openTaskEditDialog(): void {
-        console.log('check')
+        this.dialogs.open(
+            new PolymorpheusComponent(EditTaskDialogComponent),
+            { label: 'Edit data', data: { ...this.taskData }}
+        ).subscribe((res) => {
+            console.log(res)
+        })
     }
 
     onSave(): void  {
