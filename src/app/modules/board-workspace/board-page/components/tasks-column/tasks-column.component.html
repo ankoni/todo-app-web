@@ -1,31 +1,35 @@
-<nb-card *ngIf="(listData$ | async) as listData"
-         class="task-column"
-         [formGroup]="taskListForm">
-    <nb-card-header class="jc-space-between">
+<tui-island *ngIf="(listData$ | async) as listData"
+            class="task-column"
+            [formGroup]="taskListForm">
+
+    <div class="tui-island__title jc-space-between">
         <ng-container
-                [ngTemplateOutlet]="editMode ? editModeTmpl : columnName"
-                [ngTemplateOutletContext]="{ listData }" />
+            [ngTemplateOutlet]="editMode ? editModeTmpl : columnName"
+            [ngTemplateOutletContext]="{ listData }" />
         <div class="actions">
-            <button nbButton status="danger" (click)="deleteList()">Delete list</button>
-            <button nbButton status="primary" (click)="addNewTask()">Add task</button>
+            <button tuiButton size="s" (click)="deleteList()">Delete list</button>
+            <button tuiButton size="s" (click)="addNewTask()">Add task</button>
         </div>
-    </nb-card-header>
-    <nb-card-body>
+    </div>
+    <div class="tui-island__paragraph">
         <app-task-card *ngFor="let task of (tasks$ | async)"
                        [listId]="listData.id"
                        [taskData]="task"
         ></app-task-card>
-    </nb-card-body>
-</nb-card>
+    </div>
+
+</tui-island>
+
 
 <ng-template #editModeTmpl>
-    <form [formGroup]="taskListForm">
-        <input nbInput type="text" placeholder="Name"
-               fieldSize="small"
-               [formControlName]="'name'"
-               (focusout)="onSave()"
-               (keydown.enter)="onSave()"
+    <form [formGroup]="taskListForm" class="task-column_edit">
+        <tui-input [formControlName]="'name'"
+                   (focusout)="onSave()"
+                   (keydown.enter)="onSave()"
+                   tuiTextfieldSize="s"
         >
+            <input tuiTextfield type="text" placeholder="Name">
+        </tui-input>
     </form>
 </ng-template>
 <ng-template #columnName let-listData="listData">

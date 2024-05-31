@@ -6,3 +6,8 @@
   display: flex;
   gap: 16px;
 }
+.task-column {
+    &_edit {
+        flex: 1 1 auto;
+    }
+}

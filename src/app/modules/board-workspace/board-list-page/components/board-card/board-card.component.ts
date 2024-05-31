@@ -1,17 +1,20 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Board } from "../../../../../models/board-workspace/board";
 import { Subject, takeUntil } from "rxjs";
 import {
     NbButtonModule,
     NbCardModule,
     NbContextMenuDirective,
-    NbContextMenuModule, NbIconModule,
-    NbMenuItem,
+    NbContextMenuModule,
+    NbIconModule,
     NbMenuService
 } from "@nebular/theme";
 import { Router } from "@angular/router";
-import {BoardService} from "../../services/board.service";
+import { BoardService } from "../../services/board.service";
 import { CoreComponentsModule } from "../../../../../common/core-components.module";
+import { TuiIslandModule } from "@taiga-ui/kit";
+import { TuiButtonModule, TuiDataListModule, TuiHostedDropdownModule } from "@taiga-ui/core";
+import { NgForOf } from "@angular/common";
 
 @Component({
     selector: 'app-board-card',
@@ -22,7 +25,12 @@ import { CoreComponentsModule } from "../../../../../common/core-components.modu
         CoreComponentsModule,
         NbButtonModule,
         NbContextMenuModule,
-        NbIconModule
+        NbIconModule,
+        TuiIslandModule,
+        TuiButtonModule,
+        TuiHostedDropdownModule,
+        TuiDataListModule,
+        NgForOf
     ],
     standalone: true
 })
@@ -34,7 +42,7 @@ export class BoardCardComponent implements OnInit, OnDestroy {
     // @ts-ignore
     @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
 
-    cardMenuItems: NbMenuItem[] = [
+    cardMenuItems: { title: string, data: { onClick: () => void } }[] = [
         { title: 'Delete', data: { onClick: () => this.deleteBoard() } }
     ]
 

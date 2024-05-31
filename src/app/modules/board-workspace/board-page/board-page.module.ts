@@ -21,7 +21,8 @@ import { TaskService } from "./services/tasks/task.service";
 import { TaskApiService } from "./services/tasks/task-api.service";
 import { TaskEffects } from "../../../store/board-page/task/task.effects";
 import { CoreComponentsModule } from "../../../common/core-components.module";
-import { TuiInputModule, TuiIslandModule } from "@taiga-ui/kit";
+import { TuiElasticContainerModule, TuiInputModule, TuiIslandModule } from "@taiga-ui/kit";
+import { TuiButtonModule, TuiTextfieldControllerModule } from "@taiga-ui/core";
 
 const routes: Routes = [
     {
@@ -39,15 +40,10 @@ const routes: Routes = [
     imports: [
         CommonModule,
         RouterModule.forChild(routes), NbLayoutModule,
-        NbButtonModule,
-        NbInputModule,
         StoreModule.forFeature('taskList', taskListReducer),
-        NbCardModule,
         ReactiveFormsModule,
         EffectsModule.forFeature([TaskListEffects, TaskEffects]),
-        NbIconModule,
-        NbTooltipModule,
-        CoreComponentsModule, TuiIslandModule, TuiInputModule,
+        CoreComponentsModule, TuiIslandModule, TuiInputModule, TuiButtonModule, TuiElasticContainerModule, TuiTextfieldControllerModule,
     ],
     providers: [
         TaskService,

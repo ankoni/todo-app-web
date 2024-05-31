@@ -1,16 +1,31 @@
-<nb-card accent="primary" (click)="navigateToBoard()">
-    <nb-card-body class="board-card_body">
+<tui-island (click)="navigateToBoard()">
+
+    <div class="tui-island__paragraph board-card_body">
         <div stopEventPropagation>
-            <button nbButton ghost
-                    id="menuBtn"
-                    nbContextMenuTag="card-menu"
-                    [nbContextMenu]="cardMenuItems"
-                    (click)="toggleMenu()">
-                <nb-icon icon="more-vertical-outline"></nb-icon>
-            </button>
+            <tui-hosted-dropdown
+                [content]="cardMenu"
+                [sided]="true"
+            >
+                <button tuiIconButton
+                        id="menuBtn"
+                        [icon]="'tuiIconMoreVertical'"
+                        size="s"
+                        (click)="toggleMenu()"
+                ></button>
+            </tui-hosted-dropdown>
         </div>
-    </nb-card-body>
-    <nb-card-footer>
-        <div class="board-card_name">{{ board.name }}</div>
-    </nb-card-footer>
-</nb-card>
+    </div>
+
+    <div class="board-card_name tui-island__title">{{ board.name }}</div>
+</tui-island>
+
+<ng-template #cardMenu>
+    <tui-data-list>
+        <tui-opt-group>
+            <button *ngFor="let menuItem of cardMenuItems"
+                    tuiOption
+                    (click)="menuItem.data.onClick()"
+            >{{ menuItem.title }}</button>
+        </tui-opt-group>
+    </tui-data-list>
+</ng-template>

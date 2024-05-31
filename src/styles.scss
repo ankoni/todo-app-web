@@ -1,7 +1,1 @@
-@use 'themes' as *;
-
-@use '@nebular/theme/styles/globals' as *;
-
-@include nb-install() {
-  @include nb-theme-global();
-};
+@import '@taiga-ui/core/styles/taiga-ui-local';

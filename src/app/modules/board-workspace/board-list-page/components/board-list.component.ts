@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { BoardService } from "../services/board.service";
 import { Observable } from "rxjs";
 import { Board, CreateBoardDialogData } from "../../../../models/board-workspace/board";
@@ -6,18 +6,21 @@ import { NbButtonModule, NbDialogService, NbLayoutModule } from "@nebular/theme"
 import { CreateBoardDialogComponent } from "./dialogs/create-board-dialog/create-board-dialog.component";
 import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
 import { BoardCardComponent } from "./board-card/board-card.component";
+import { TuiIslandModule } from "@taiga-ui/kit";
+import { TuiButtonModule, TuiDialogService } from "@taiga-ui/core";
+import { PolymorpheusComponent } from "@tinkoff/ng-polymorpheus";
 
 @Component({
     selector: 'app-board-list-page',
     templateUrl: './board-list.component.html',
     styleUrls: ['./board-list.component.scss'],
     imports: [
-        NbLayoutModule,
-        NbButtonModule,
         NgForOf,
         AsyncPipe,
         NgIf,
-        BoardCardComponent
+        BoardCardComponent,
+        TuiIslandModule,
+        TuiButtonModule
     ],
     standalone: true
 })
@@ -26,7 +29,7 @@ export class BoardListComponent implements OnInit {
 
     constructor(
         private boardService: BoardService,
-        private dialogService: NbDialogService,
+        @Inject(TuiDialogService) private readonly dialogs: TuiDialogService
     ) {
     }
 
@@ -34,8 +37,9 @@ export class BoardListComponent implements OnInit {
     }
 
     addNewBoard(): void {
-        this.dialogService
-            .open(CreateBoardDialogComponent, {}).onClose
+        this.dialogs.open<CreateBoardDialogData>(new PolymorpheusComponent(CreateBoardDialogComponent), {
+            label: 'Create board'
+        })
             .subscribe((formData?: CreateBoardDialogData) => {
                 if (!formData) {
                     return;

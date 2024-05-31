@@ -18,15 +18,11 @@ import { GraphQLModule } from './graphql.module';
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        NbThemeModule.forRoot({ name: 'default' }),
-        NbLayoutModule,
-        NbEvaIconsModule,
         AppRoutingModule,
         HttpClientModule,
         StoreModule.forRoot({}, {}),
         EffectsModule.forRoot([]),
         GraphQLModule,
-        NbMenuModule.forRoot(),
         TuiRootModule,
         TuiDialogModule,
         TuiAlertModule

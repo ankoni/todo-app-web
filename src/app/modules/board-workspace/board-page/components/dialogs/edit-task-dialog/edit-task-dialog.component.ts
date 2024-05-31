@@ -10,9 +10,6 @@ import { Task } from "../../../../../../models/board-workspace/task";
   selector: 'app-edit-task-dialog',
   standalone: true,
     imports: [
-        NbCardModule,
-        NbButtonModule,
-        NbIconModule,
         TuiIslandModule,
         TuiInputModule,
         ReactiveFormsModule,

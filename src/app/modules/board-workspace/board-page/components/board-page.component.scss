@@ -1,6 +1,12 @@
-.board-page_content {
-  display: flex;
-  flex-direction: column;
+.board-page {
+    &_content {
+        display: flex;
+        flex-direction: column;
+    }
+    &_header {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 .task-column-list {
   display: flex;
