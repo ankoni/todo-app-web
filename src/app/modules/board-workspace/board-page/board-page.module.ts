@@ -4,14 +4,7 @@ import { BoardPageComponent } from "./components/board-page.component";
 import { TasksColumnComponent } from "./components/tasks-column/tasks-column.component";
 import { TaskCardComponent } from "./components/task-card/task-card.component";
 import { RouterModule, Routes } from "@angular/router";
-import {
-    NbButtonModule,
-    NbCardModule,
-    NbIconModule,
-    NbInputModule,
-    NbLayoutModule,
-    NbTooltipModule
-} from "@nebular/theme";
+import { NbLayoutModule } from "@nebular/theme";
 import { StoreModule } from "@ngrx/store";
 import { taskListReducer } from "../../../store/board-page/task-list/task-list.reducer";
 import { ReactiveFormsModule } from "@angular/forms";

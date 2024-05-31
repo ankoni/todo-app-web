@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { NbButtonModule, NbCardModule, NbDialogRef, NbIconModule, NbInputModule } from "@nebular/theme";
 import { CreateBoardDialogData } from "../../../../../../models/board-workspace/board";
 import { POLYMORPHEUS_CONTEXT } from "@tinkoff/ng-polymorpheus";
 import { TuiButtonModule, TuiDialogContext } from "@taiga-ui/core";

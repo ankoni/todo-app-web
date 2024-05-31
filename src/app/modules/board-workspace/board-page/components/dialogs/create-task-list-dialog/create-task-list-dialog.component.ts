@@ -1,10 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { NbButtonModule, NbCardModule, NbDialogRef, NbIconModule, NbInputModule } from "@nebular/theme";
 import { CreateTaskListDialogData, TaskList } from "../../../../../../models/board-workspace/task-list";
 import { POLYMORPHEUS_CONTEXT } from "@tinkoff/ng-polymorpheus";
 import { TuiButtonModule, TuiDialogContext } from "@taiga-ui/core";
-import { Task } from "../../../../../../models/board-workspace/task";
 import { TuiInputModule, TuiInputPhoneModule, TuiTextareaModule } from "@taiga-ui/kit";
 
 @Component({

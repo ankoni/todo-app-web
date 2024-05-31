@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule } from "@nebular/theme";
 import { TuiInputModule, TuiIslandModule, TuiTextareaModule } from "@taiga-ui/kit";
 import { TuiButtonModule, TuiDialogContext, TuiDialogService } from "@taiga-ui/core";
 import { POLYMORPHEUS_CONTEXT } from "@tinkoff/ng-polymorpheus";

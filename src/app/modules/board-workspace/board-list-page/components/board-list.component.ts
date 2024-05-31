@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { BoardService } from "../services/board.service";
 import { Observable } from "rxjs";
 import { Board, CreateBoardDialogData } from "../../../../models/board-workspace/board";
-import { NbButtonModule, NbDialogService, NbLayoutModule } from "@nebular/theme";
 import { CreateBoardDialogComponent } from "./dialogs/create-board-dialog/create-board-dialog.component";
 import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
 import { BoardCardComponent } from "./board-card/board-card.component";
