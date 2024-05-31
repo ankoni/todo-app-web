@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { TaskService } from "../services/tasks/task.service";
-import { BehaviorSubject, Subject, takeUntil } from "rxjs";
+import { BehaviorSubject, Subject, switchMap, take, takeUntil, tap } from "rxjs";
 import { CreateTaskListDialogComponent } from "./dialogs/create-task-list-dialog/create-task-list-dialog.component";
 import { TaskList } from "../../../../models/board-workspace/task-list";
 import { BoardService } from "../../board-list-page/services/board.service";
@@ -34,13 +34,22 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.boardService.getOneBoard(this.boardId)
-            .pipe(takeUntil(this.destroyed$))
-            .subscribe((board: Board) => {
-                this.boardInfo$.next(board)
-                if (board.taskLists) {
-                    this.taskLists$.next(board.taskLists)
+            .pipe(
+                take(1),
+                tap((board: Board) => {
+                    this.boardInfo$.next(board)
+                }),
+                switchMap((board: Board) => {
+                    return this.taskService.getAllTaskList(board.id)
+                }),
+                takeUntil(this.destroyed$)
+            )
+            .subscribe((taskList: TaskList[]) => {
+                if (taskList) {
+                    this.taskLists$.next(taskList)
                 }
             })
+
     }
 
     addNewTaskList(): void {
