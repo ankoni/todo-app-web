@@ -43,11 +43,13 @@ export class TaskCardComponent implements OnInit, OnDestroy {
     }
 
     openTaskEditDialog(): void {
-        this.dialogs.open(
+        this.dialogs.open<Pick<Task, 'name' | 'description'>>(
             new PolymorpheusComponent(EditTaskDialogComponent),
             { label: 'Edit data', data: { ...this.taskData }}
-        ).subscribe((res) => {
-            console.log(res)
+        ).subscribe((editedData) => {
+            if (editedData) {
+                this.taskService.editTaskGeneralInfo(this.listId, this.taskData.id, editedData)
+            }
         })
     }
 

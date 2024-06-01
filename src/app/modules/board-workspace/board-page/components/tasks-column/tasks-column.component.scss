@@ -10,4 +10,12 @@
     &_edit {
         flex: 1 1 auto;
     }
+    &_tasks {
+        & app-task-card {
+            display: block;
+            &:not(:last-child) {
+                margin-bottom: 16px;
+            }
+        }
+    }
 }

@@ -1,19 +1,17 @@
 <div class="tui-container_fullwidth">
     <div class="board-page_header tui-row_align_center">
         <h1 class="flex align-center">
-            <button tuiIconButton [icon]="'tuiIconArrowLeft'" (click)="backToBoardList()"></button>
-            <span>{{ (boardInfo$ | async)?.name }}</span>
+            <button tuiIconButton size="m" [icon]="'tuiIconArrowLeft'" (click)="backToBoardList()"></button>
+            <span class="tui-space_left-5">Board: {{ (boardInfo$ | async)?.name }}</span>
         </h1>
         <button tuiButton size="m" (click)="addNewTaskList()">Add task list</button>
     </div>
-    <div class="tui-row">
-        <tui-elastic-container class="board-page_content">
-            <div class="task-column-list">
-                <app-tasks-column
-                    *ngFor="let list of taskLists$ | async"
-                    [taskListId]="list.id"
-                />
-            </div>
-        </tui-elastic-container>
-    </div>
+    <tui-elastic-container class="board-page_content">
+        <div class="task-column-list">
+            <app-tasks-column
+                *ngFor="let list of taskLists$ | async"
+                [taskListId]="list.id"
+            />
+        </div>
+    </tui-elastic-container>
 </div>

@@ -6,7 +6,9 @@
         </tui-input>
     </form>
     <div class="tui-form__buttons tui-form__buttons_align_end">
-        <button tuiButton appearance="outline" (click)="close()">Cancel</button>
+        <button tuiButton appearance="outline"
+                class="tui-space_right-3"
+                (click)="close()">Cancel</button>
         <button tuiButton
                 [disabled]="form.invalid"
                 (click)="accept()">Create</button>

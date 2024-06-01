@@ -11,7 +11,7 @@
 </tui-island>
 
 <ng-template #editName>
-    <form [formGroup]="form" class="task-card_edit-field">
+    <form [formGroup]="form" class="task-card_edit-field" stopEventPropagation>
         <tui-input
             [formControlName]="'name'"
             (focusout)="onSave()"
@@ -24,7 +24,7 @@
         </tui-input>
     </form>
 
-    <button tuiButton size="s" (click)="onSave()">Save</button>
+    <button tuiButton size="s" (click)="onSave()" stopEventPropagation>Save</button>
 </ng-template>
 <ng-template #showInfo>
     <div (dblclick)="editCardName()" stopEventPropagation>

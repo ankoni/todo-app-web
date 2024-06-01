@@ -27,7 +27,7 @@ export class EditTaskDialogComponent {
     constructor(
         @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
         @Inject(POLYMORPHEUS_CONTEXT)
-        private readonly context: TuiDialogContext<Partial<Task> | null, Task>,
+        private readonly context: TuiDialogContext<Pick<Task, 'name' | 'description'> | null, Task>,
     ) {
         const { name, description } = this.context.data
         this.form.setValue({

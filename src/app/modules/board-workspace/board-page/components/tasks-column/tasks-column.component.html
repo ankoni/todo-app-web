@@ -11,7 +11,7 @@
             <button tuiButton size="s" (click)="addNewTask()">Add task</button>
         </div>
     </div>
-    <div class="tui-island__paragraph">
+    <div class="tui-island__paragraph task-column_tasks">
         <app-task-card *ngFor="let task of (tasks$ | async)"
                        [listId]="listData.id"
                        [taskData]="task"

@@ -10,6 +10,7 @@ export const EDIT_TASK = gql`
         updateTask(updateTask: $updateTask) {
             id
             name
+            description
             order
         }
     }

@@ -1,7 +1,7 @@
 <div class="tui-container_fullwidth">
     <h1 class="jc-space-between align-center">
         <div>Boards</div>
-        <button tuiButton (click)="addNewBoard()">Add board</button>
+        <button tuiButton size="m" (click)="addNewBoard()">Add board</button>
     </h1>
     <div class="boards">
         <app-board-card *ngFor="let board of (boardList$ | async)"
