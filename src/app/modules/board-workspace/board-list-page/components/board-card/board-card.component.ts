@@ -27,9 +27,6 @@ export class BoardCardComponent implements OnInit, OnDestroy {
     @Input()
     board!: Board;
 
-    // @ts-ignore
-    @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
-
     cardMenuItems: { title: string, data: { onClick: () => void } }[] = [
         { title: 'Delete', data: { onClick: () => this.deleteBoard() } }
     ]
@@ -41,10 +38,6 @@ export class BoardCardComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-    }
-
-    toggleMenu(): void {
-        this.contextMenu?.toggle();
     }
 
     navigateToBoard(): void {

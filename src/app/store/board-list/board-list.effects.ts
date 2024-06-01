@@ -5,15 +5,19 @@ import { Store } from "@ngrx/store";
 import { BoardApiService } from "../../modules/board-workspace/board-list-page/services/board-api.service";
 import {
     addNewBoard,
-    AddNewBoardSuccess, getOneBoard, GetOneBoardSuccess,
+    AddNewBoardSuccess,
+    getOneBoard,
+    GetOneBoardSuccess,
     loadBoardList,
     LoadBoardListSuccess,
     removeBoard,
     RemoveBoardSuccess
 } from "./board-list.actions";
-import { filter, map, mergeMap, of, withLatestFrom } from "rxjs";
-import { dummyAction, LoadTaskListsSuccess } from "../board-page/task-list/task-list.actions";
+import { forkJoin, map, mergeMap, of, switchMap, withLatestFrom } from "rxjs";
+import { dummyAction } from "../board-page/task-list/task-list.actions";
 import { Router } from "@angular/router";
+import { getBoardList } from "./board-list.selectors";
+import { BoardService } from "../../modules/board-workspace/board-list-page/services/board.service";
 
 @Injectable()
 export class BoardListEffects {
@@ -21,6 +25,7 @@ export class BoardListEffects {
         private actions$: Actions,
         private store: Store<{ boardList: Board[] }>,
         private boardApiService: BoardApiService,
+        private boardService: BoardService,
         private router: Router
     ) {
     }
@@ -68,16 +73,24 @@ export class BoardListEffects {
         this.actions$
             .pipe(
                 ofType(getOneBoard),
-                mergeMap(({ id }) => {
-                    return this.boardApiService.getBoardInfoById(id)
-                        .pipe(
-                            map((board: Board | null) => {
-                                if (board?.taskLists) {
-                                    this.store.dispatch(new LoadTaskListsSuccess(board.taskLists ?? []))
-                                }
-                                return board ? new GetOneBoardSuccess(board) : dummyAction()
-                            })
-                        )
+                switchMap(({ id }) => {
+                    return forkJoin(
+                        [
+                            this.boardService.getBoardByIdFromStore(id),
+                            of(id)
+                        ]
+                    )
+                }),
+                mergeMap(([storeBoardInfo, id]) => {
+                    if (!storeBoardInfo) {
+                        return this.boardApiService.getBoardInfoById(id)
+                            .pipe(
+                                map((board: Board | null) => {
+                                    return board ? new GetOneBoardSuccess(board) : dummyAction()
+                                })
+                            )
+                    }
+                    return of(dummyAction())
                 })
             )
     )
