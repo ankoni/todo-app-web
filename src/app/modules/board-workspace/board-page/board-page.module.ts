@@ -4,7 +4,6 @@ import { BoardPageComponent } from "./components/board-page.component";
 import { TasksColumnComponent } from "./components/tasks-column/tasks-column.component";
 import { TaskCardComponent } from "./components/task-card/task-card.component";
 import { RouterModule, Routes } from "@angular/router";
-import { NbLayoutModule } from "@nebular/theme";
 import { StoreModule } from "@ngrx/store";
 import { taskListReducer } from "../../../store/board-page/task-list/task-list.reducer";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -32,11 +31,16 @@ const routes: Routes = [
     ],
     imports: [
         CommonModule,
-        RouterModule.forChild(routes), NbLayoutModule,
+        RouterModule.forChild(routes),
         StoreModule.forFeature('taskList', taskListReducer),
         ReactiveFormsModule,
         EffectsModule.forFeature([TaskListEffects, TaskEffects]),
-        CoreComponentsModule, TuiIslandModule, TuiInputModule, TuiButtonModule, TuiElasticContainerModule, TuiTextfieldControllerModule,
+        CoreComponentsModule,
+        TuiIslandModule,
+        TuiInputModule,
+        TuiButtonModule,
+        TuiElasticContainerModule,
+        TuiTextfieldControllerModule,
     ],
     providers: [
         TaskService,

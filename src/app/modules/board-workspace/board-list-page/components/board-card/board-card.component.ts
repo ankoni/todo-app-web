@@ -1,14 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Board } from "../../../../../models/board-workspace/board";
 import { Subject, takeUntil } from "rxjs";
-import {
-    NbButtonModule,
-    NbCardModule,
-    NbContextMenuDirective,
-    NbContextMenuModule,
-    NbIconModule,
-    NbMenuService
-} from "@nebular/theme";
 import { Router } from "@angular/router";
 import { BoardService } from "../../services/board.service";
 import { CoreComponentsModule } from "../../../../../common/core-components.module";
@@ -21,11 +13,7 @@ import { NgForOf } from "@angular/common";
     templateUrl: './board-card.component.html',
     styleUrls: ['./board-card.component.scss'],
     imports: [
-        NbCardModule,
         CoreComponentsModule,
-        NbButtonModule,
-        NbContextMenuModule,
-        NbIconModule,
         TuiIslandModule,
         TuiButtonModule,
         TuiHostedDropdownModule,
@@ -47,18 +35,12 @@ export class BoardCardComponent implements OnInit, OnDestroy {
     ]
 
     constructor(
-        private nbMenuService: NbMenuService,
         private router: Router,
         private boardListService: BoardService,
     ) {
     }
 
     ngOnInit(): void {
-        this.nbMenuService.onItemClick()
-            .pipe(takeUntil(this.destroyed$))
-            .subscribe(({ item }) => {
-                item.data?.onClick?.();
-            });
     }
 
     toggleMenu(): void {

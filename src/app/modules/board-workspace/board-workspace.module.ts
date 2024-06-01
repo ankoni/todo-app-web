@@ -7,16 +7,6 @@ import { EffectsModule } from "@ngrx/effects";
 import { BoardListEffects } from "../../store/board-list/board-list.effects";
 import { BoardService } from "./board-list-page/services/board.service";
 import { BoardApiService } from "./board-list-page/services/board-api.service";
-import {
-    NbButtonModule,
-    NbCardModule,
-    NbContextMenuModule,
-    NbDialogModule,
-    NbIconModule,
-    NbInputModule,
-    NbLayoutModule,
-    NbMenuService
-} from "@nebular/theme";
 import { ReactiveFormsModule } from "@angular/forms";
 
 const routes: Routes = [
@@ -36,19 +26,11 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         StoreModule.forFeature('boardList', boardListReducer),
         EffectsModule.forFeature([BoardListEffects]),
-        NbDialogModule.forChild(),
-        NbButtonModule,
         ReactiveFormsModule,
-        NbLayoutModule,
-        NbCardModule,
-        NbInputModule,
-        NbIconModule,
-        NbContextMenuModule,
     ],
     providers: [
         BoardService,
         BoardApiService,
-        NbMenuService,
     ]
 })
 export class BoardWorkspaceModule {
