@@ -1,6 +1,6 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Board } from "../../../../../models/board-workspace/board";
-import { Subject, takeUntil } from "rxjs";
+import { Subject } from "rxjs";
 import { Router } from "@angular/router";
 import { BoardService } from "../../services/board.service";
 import { CoreComponentsModule } from "../../../../../common/core-components.module";

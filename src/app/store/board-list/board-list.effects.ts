@@ -16,7 +16,6 @@ import {
 import { forkJoin, map, mergeMap, of, switchMap, withLatestFrom } from "rxjs";
 import { dummyAction } from "../board-page/task-list/task-list.actions";
 import { Router } from "@angular/router";
-import { getBoardList } from "./board-list.selectors";
 import { BoardService } from "../../modules/board-workspace/board-list-page/services/board.service";
 
 @Injectable()
