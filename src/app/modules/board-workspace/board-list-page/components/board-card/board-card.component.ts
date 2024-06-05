@@ -1,44 +1,43 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Board } from "../../../../../models/board-workspace/board";
-import { Subject, takeUntil } from "rxjs";
-import {NbContextMenuDirective, NbMenuItem, NbMenuService} from "@nebular/theme";
+import { Subject } from "rxjs";
 import { Router } from "@angular/router";
-import {BoardService} from "../../services/board.service";
+import { BoardService } from "../../services/board.service";
+import { CoreComponentsModule } from "../../../../../common/core-components.module";
+import { TuiIslandModule } from "@taiga-ui/kit";
+import { TuiButtonModule, TuiDataListModule, TuiHostedDropdownModule } from "@taiga-ui/core";
+import { NgForOf } from "@angular/common";
 
 @Component({
     selector: 'app-board-card',
     templateUrl: './board-card.component.html',
-    styleUrls: ['./board-card.component.scss']
+    styleUrls: ['./board-card.component.scss'],
+    imports: [
+        CoreComponentsModule,
+        TuiIslandModule,
+        TuiButtonModule,
+        TuiHostedDropdownModule,
+        TuiDataListModule,
+        NgForOf
+    ],
+    standalone: true
 })
 export class BoardCardComponent implements OnInit, OnDestroy {
     private destroyed$ = new Subject<void>();
     @Input()
     board!: Board;
 
-    // @ts-ignore
-    @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
-
-    cardMenuItems: NbMenuItem[] = [
+    cardMenuItems: { title: string, data: { onClick: () => void } }[] = [
         { title: 'Delete', data: { onClick: () => this.deleteBoard() } }
     ]
 
     constructor(
-        private nbMenuService: NbMenuService,
         private router: Router,
         private boardListService: BoardService,
     ) {
     }
 
     ngOnInit(): void {
-        this.nbMenuService.onItemClick()
-            .pipe(takeUntil(this.destroyed$))
-            .subscribe(({ item }) => {
-                item.data?.onClick?.();
-            });
-    }
-
-    toggleMenu(): void {
-        this.contextMenu?.toggle();
     }
 
     navigateToBoard(): void {

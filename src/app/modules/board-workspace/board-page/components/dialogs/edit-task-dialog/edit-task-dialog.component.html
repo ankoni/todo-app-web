@@ -1,0 +1,36 @@
+<div class="tui-form">
+    <form [formGroup]="form">
+        <div class="tui-form__row">
+            <tui-input [formControlName]="'name'">
+                Name
+                <input tuiTextfield type="text" placeholder="Name">
+            </tui-input>
+        </div>
+        <div class="tui-form__row">
+            <tui-textarea [formControlName]="'description'">
+                Description
+            </tui-textarea>
+        </div>
+    </form>
+
+    <div class="tui-form__buttons tui-form__buttons_align_end">
+        <button
+            appearance="outline"
+            tuiButton
+            type="button"
+            class="tui-space_right-3"
+            (click)="close()"
+        >
+            Cancel
+        </button>
+        <button
+            tuiButton
+            type="button"
+            (click)="save()"
+        >
+            Save
+        </button>
+
+    </div>
+
+</div>

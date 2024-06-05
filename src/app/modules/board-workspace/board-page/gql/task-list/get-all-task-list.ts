@@ -14,6 +14,7 @@ export const GET_ALL_TASK_LIST = gql`
             tasks {
                 id
                 name
+                description
                 order
             }
         }

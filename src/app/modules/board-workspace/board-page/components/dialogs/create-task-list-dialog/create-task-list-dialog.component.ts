@@ -1,11 +1,21 @@
-import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {NbDialogRef} from "@nebular/theme";
-import {CreateTaskListDialogData} from "../../../../../../models/board-workspace/task-list";
+import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { CreateTaskListDialogData, TaskList } from "../../../../../../models/board-workspace/task-list";
+import { POLYMORPHEUS_CONTEXT } from "@tinkoff/ng-polymorpheus";
+import { TuiButtonModule, TuiDialogContext } from "@taiga-ui/core";
+import { TuiInputModule, TuiInputPhoneModule, TuiTextareaModule } from "@taiga-ui/kit";
 
 @Component({
     selector: 'app-create-tasks-column-dialog',
     templateUrl: './create-task-list-dialog.component.html',
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        TuiButtonModule,
+        TuiInputModule,
+        TuiInputPhoneModule,
+        TuiTextareaModule
+    ],
     styleUrls: ['./create-task-list-dialog.component.scss', '../../../../../../common/components/dialogs/dialog.scss']
 })
 export class CreateTaskListDialogComponent {
@@ -14,12 +24,12 @@ export class CreateTaskListDialogComponent {
     });
 
     constructor(
-        private dialogRef: NbDialogRef<CreateTaskListDialogComponent>
+        @Inject(POLYMORPHEUS_CONTEXT) private readonly context: TuiDialogContext<Partial<TaskList> | null, Partial<TaskList>>,
     ) {
     }
 
     close(data?: CreateTaskListDialogData): void {
-      this.dialogRef.close(data)
+      this.context.completeWith(data as Partial<TaskList>)
     }
 
     accept(): void {

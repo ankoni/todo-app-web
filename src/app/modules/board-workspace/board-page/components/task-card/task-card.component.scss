@@ -1,3 +1,6 @@
 .task-card {
   cursor: pointer;
+    &_edit-field {
+        flex: 1 0 50%;
+    }
 }

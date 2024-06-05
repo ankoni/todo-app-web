@@ -13,6 +13,8 @@ export const GET_ONE_TASK_LIST = gql`
             tasks {
                 id
                 name
+                description
+                order
             }
         }
     }

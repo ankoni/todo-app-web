@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { TaskService } from "../services/tasks/task.service";
-import { BehaviorSubject, Subject, takeUntil } from "rxjs";
-import { NbDialogService } from "@nebular/theme";
+import { BehaviorSubject, Subject, switchMap, take, takeUntil, tap } from "rxjs";
 import { CreateTaskListDialogComponent } from "./dialogs/create-task-list-dialog/create-task-list-dialog.component";
-import { CreateTaskListDialogData, TaskList } from "../../../../models/board-workspace/task-list";
+import { TaskList } from "../../../../models/board-workspace/task-list";
 import { BoardService } from "../../board-list-page/services/board.service";
 import { Board } from "../../../../models/board-workspace/board";
+import { TuiDialogService } from "@taiga-ui/core";
+import { PolymorpheusComponent } from "@tinkoff/ng-polymorpheus";
 
 @Component({
     selector: 'app-board-page',
@@ -26,26 +27,36 @@ export class BoardPageComponent implements OnInit, OnDestroy {
         private boardService: BoardService,
         private route: ActivatedRoute,
         private router: Router,
-        private dialogService: NbDialogService,
+        @Inject(TuiDialogService) private readonly dialogs: TuiDialogService
     ) {
         this.boardId = this.route.snapshot.paramMap.get('id') as string;
     }
 
     ngOnInit(): void {
         this.boardService.getOneBoard(this.boardId)
-            .pipe(takeUntil(this.destroyed$))
-            .subscribe((board: Board) => {
-                this.boardInfo$.next(board)
-                if (board.taskLists) {
-                    this.taskLists$.next(board.taskLists)
+            .pipe(
+                take(1),
+                tap((board: Board) => {
+                    this.boardInfo$.next(board)
+                }),
+                switchMap((board: Board) => {
+                    return this.taskService.getAllTaskList(board.id)
+                }),
+                takeUntil(this.destroyed$)
+            )
+            .subscribe((taskList: TaskList[]) => {
+                if (taskList) {
+                    this.taskLists$.next(taskList)
                 }
             })
+
     }
 
     addNewTaskList(): void {
-        this.dialogService.open(CreateTaskListDialogComponent)
-            .onClose
-            .subscribe((data?: CreateTaskListDialogData) => {
+        this.dialogs.open<TaskList>(new PolymorpheusComponent(CreateTaskListDialogComponent),
+            { label: 'Create task list' }
+        )
+            .subscribe((data: TaskList) => {
                 if (!data) {
                     return;
                 }

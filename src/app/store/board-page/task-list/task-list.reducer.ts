@@ -32,6 +32,7 @@ export const taskListReducer = createReducer(
         return taskListAdapter.updateOne({id: listId, changes: {tasks: data}}, state)
     }),
     on(createTaskListSuccess, (state, action) => {
+        console.log(action)
         return action.taskList ? taskListAdapter.addOne(action.taskList, state) : state;
     }),
     on(editTaskListSuccess, (state, { listId, data}) => {

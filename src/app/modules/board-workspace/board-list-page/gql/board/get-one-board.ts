@@ -11,16 +11,6 @@ export const GET_ONE_BOARD = gql`
             id
             name
             description
-            taskLists {
-                id
-                name
-                order
-                tasks {
-                    id
-                    name
-                    order
-                }
-            }
         }
     }
 `

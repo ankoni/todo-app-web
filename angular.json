@@ -26,10 +26,20 @@
                         "tsConfig": "tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                          "src/favicon.ico",
+                          "src/assets",
+                          {
+                            "glob": "**/*",
+                            "input": "node_modules/@taiga-ui/icons/src",
+                            "output": "assets/taiga-ui/icons"
+                          }
                         ],
-                        "styles": ["src/styles.scss", "src/assets/styles/main.scss"],
+                        "styles": [
+                          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+                          "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
+                          "node_modules/@taiga-ui/styles/taiga-ui-global.less",
+                          "src/assets/styles/main.scss"
+                        ],
                         "scripts": []
                     },
                     "configurations": {
@@ -59,7 +69,7 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "todo-app:build",
+                        "buildTarget": "todo-app:build",
                         "proxyConfig": "src/proxy.conf.json"
                     },
                     "configurations": {

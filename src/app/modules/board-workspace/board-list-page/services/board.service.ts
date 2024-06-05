@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { filter, map, Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Board, CreateBoardDialogData } from "../../../../models/board-workspace/board";
 import { Store } from "@ngrx/store";
 import { getBoardList } from "../../../../store/board-list/board-list.selectors";
@@ -19,10 +19,13 @@ export class BoardService {
 
     getOneBoard(boardId: string): Observable<Board> {
         this.store.dispatch(new GetOneBoard(boardId))
+        return this.getBoardByIdFromStore(boardId)
+    }
+
+    getBoardByIdFromStore(id: string): Observable<Board> {
         return <Observable<Board>>this.store.select(getBoardList)
             .pipe(
-                map((boards: Board[]) => boards.find((board) => board.id === boardId)),
-                filter((board: Board | undefined) => !!board)
+                map((boards: Board[]) => boards.find((board: Board) => board.id === id))
             )
     }
 

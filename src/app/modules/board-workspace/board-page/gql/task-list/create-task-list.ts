@@ -14,6 +14,7 @@ export const CREATE_TASK_LIST = gql`
                 id
                 name
                 order
+                description
             }
         }
     }

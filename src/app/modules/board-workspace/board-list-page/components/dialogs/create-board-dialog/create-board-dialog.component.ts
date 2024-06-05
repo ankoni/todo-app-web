@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { NbDialogRef } from "@nebular/theme";
+import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { CreateBoardDialogData } from "../../../../../../models/board-workspace/board";
+import { POLYMORPHEUS_CONTEXT } from "@tinkoff/ng-polymorpheus";
+import { TuiButtonModule, TuiDialogContext } from "@taiga-ui/core";
+import { TuiInputModule, TuiInputPhoneModule, TuiTextareaModule } from "@taiga-ui/kit";
 
 @Component({
     selector: 'app-create-board-dialog',
     templateUrl: './create-board-dialog.component.html',
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        TuiButtonModule,
+        TuiInputModule,
+        TuiInputPhoneModule,
+        TuiTextareaModule
+    ],
     styleUrls: ['./create-board-dialog.component.scss', '../../../../../../common/components/dialogs/dialog.scss']
 })
 export class CreateBoardDialogComponent {
@@ -15,12 +25,12 @@ export class CreateBoardDialogComponent {
     });
 
     constructor(
-        private dialogReg: NbDialogRef<CreateBoardDialogComponent>
+        @Inject(POLYMORPHEUS_CONTEXT) private readonly context: TuiDialogContext<any, CreateBoardDialogData>
     ) {
     }
 
     close(data?: CreateBoardDialogData): void {
-        this.dialogReg.close(data);
+        this.context.completeWith(data);
     }
 
     accept(): void {
